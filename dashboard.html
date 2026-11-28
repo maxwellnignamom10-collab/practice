@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4f6f1" />
+  <title>Dominic Nitiwul Farm | Dashboard</title>
+  <script>
+    const savedTheme = localStorage.getItem("farm-dashboard-theme");
+    document.documentElement.dataset.theme = savedTheme === "dark" ? "dark" : "light";
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+
+<body>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">DN</div>
+      <div>
+        <strong>Dominic Nitiwul</strong>
+        <span>Farm management</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main navigation">
+      <p class="nav-label">Management</p>
+      <button class="nav-item active" data-page="Dashboard">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-16v4h6V4h-6Z" />
+        </svg>
+        Dashboard
+      </button>
+      <button class="nav-item" data-page="Livestock">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M7 9.5V6m10 3.5V6M5 11c0-3 3-5 7-5s7 2 7 5v4c0 3-2 5-5 5h-4c-3 0-5-2-5-5v-4Zm2 9v-2m10 2v-2M9 10h.01M15 10h.01" />
+        </svg>
+        Livestock
+      </button>
+      <button class="nav-item" data-page="Breeding">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM12 8v8m-4-4h8" />
+        </svg>
+        Breeding
+      </button>
+      <button class="nav-item" data-page="Sales & Orders">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6m4 12h.01M17 19h.01" />
+        </svg>
+        Sales & orders
+        <span class="nav-badge">6</span>
+      </button>
+      <button class="nav-item" data-page="Customers">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m7-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm13 10v-2a4 4 0 0 0-3-3.87m-2-11.5a4 4 0 0 1 0 7.75" />
+        </svg>
+        Customers
+      </button>
+      <button class="nav-item" data-page="Feed & Inventory">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 7h16v13H4V7Zm4 0V4h8v3M4 12h16" />
+        </svg>
+        Feed & inventory
+      </button>
+      <button class="nav-item" data-page="Health">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21S3 16 3 9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 7-9 12-9 12Zm-4-9h8m-4-4v8" />
+        </svg>
+        Health & veterinary
+      </button>
+
+      <p class="nav-label">Business</p>
+      <button class="nav-item" data-page="Finance">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 3v18h18M7 16l4-4 3 3 6-7" />
+        </svg>
+        Finance & expenses
+      </button>
+      <button class="nav-item" data-page="Workers">
+        <svg viewBox="0 0 24 24">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2m7.5-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM17 11l2 2 4-4" />
+        </svg>
+        Workers
+      </button>
+      <button class="nav-item" data-page="Enquiries">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8ZM8 9h8m-8 4h5" />
+        </svg>
+        Enquiries
+        <span class="nav-dot"></span>
+      </button>
+      <button class="nav-item" data-page="Reports">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 20V10m5 10V4m6 16v-7m5 7V7" />
+        </svg>
+        Reports
+      </button>
+
+      <p class="nav-label">Website</p>
+      <button class="nav-item" data-page="Website Content">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-18v18m-9-9h18" />
+        </svg>
+        Website content
+      </button>
+      <button class="nav-item" data-page="Settings">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.82 1.82-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.04 1.56V20h-2.58v-.08A1.7 1.7 0 0 0 11.42 18.36a1.7 1.7 0 0 0-1.88.34l-.06.06-1.82-1.82.06-.06A1.7 1.7 0 0 0 8.06 15 1.7 1.7 0 0 0 6.5 14H6.42v-2.58H6.5A1.7 1.7 0 0 0 8.06 10.38a1.7 1.7 0 0 0-.34-1.88l-.06-.06L9.48 6.62l.06.06a1.7 1.7 0 0 0 1.88.34A1.7 1.7 0 0 0 12.46 5.46V5.38h2.58v.08a1.7 1.7 0 0 0 1.04 1.56 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.82 1.82-.06.06A1.7 1.7 0 0 0 19.44 10.38 1.7 1.7 0 0 0 21 11.42v2.58h.08A1.7 1.7 0 0 0 19.4 15Z" />
+        </svg>
+        Settings
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="profile" id="profileFarmLink" type="button" aria-label="View public farm website">
+        <span class="avatar">DN</span>
+        <span><strong>Dominic Nitiwul</strong><small>Owner</small></span>
+        <svg viewBox="0 0 24 24">
+          <path d="m8 10 4 4 4-4" />
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="icon-button menu-button" id="menuButton" aria-label="Open menu">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <div class="title-wrap">
+        <p id="todayLabel">Thursday, 27 November</p>
+        <h1 id="pageTitle">Dashboard</h1>
+      </div>
+      <div class="top-actions">
+        <label class="search">
+          <svg viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-4-4" />
+          </svg>
+          <input id="globalSearch" type="search" placeholder="Search records..." />
+        </label>
+        <a class="view-farm-button" href="index.html" aria-label="View public farm website">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 11 12 4l9 7M5 10v10h14V10M9 20v-6h6v6" />
+          </svg>
+          <span>View farm</span>
+        </a>
+        <button class="icon-button theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z" />
+          </svg>
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+          </svg>
+        </button>
+        <button class="icon-button" id="notificationButton" type="button" aria-label="Notifications">
+          <svg viewBox="0 0 24 24">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" />
+          </svg>
+          <span class="alert-dot"></span>
+        </button>
+        <button class="primary-button" id="addPigButton">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+          Add pig
+        </button>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="kpi-grid" aria-label="Farm overview">
+        <article class="kpi-card">
+          <div class="kpi-heading"><span>Total livestock</span><span class="status-icon green"><svg viewBox="0 0 24 24">
+                <path d="M7 9.5V6m10 3.5V6M5 11c0-3 3-5 7-5s7 2 7 5v4c0 3-2 5-5 5h-4c-3 0-5-2-5-5v-4Z" />
+              </svg></span></div>
+          <strong>248</strong>
+          <div class="kpi-foot"><span class="trend positive">+12</span><small>this month</small></div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-heading"><span>Available for sale</span><span class="status-icon orange"><svg
+                viewBox="0 0 24 24">
+                <path d="M3 3h2l2.4 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L21 7H6" />
+              </svg></span></div>
+          <strong>42</strong>
+          <div class="kpi-foot"><span class="trend neutral">17%</span><small>of total herd</small></div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-heading"><span>Total sales</span><span class="status-icon blue"><svg viewBox="0 0 24 24">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg></span></div>
+          <strong>GH₵ 86,420</strong>
+          <div class="kpi-foot"><span class="trend positive">+8.4%</span><small>vs last month</small></div>
+        </article>
+        <article class="kpi-card">
+          <div class="kpi-heading"><span>Estimated profit</span><span class="status-icon purple"><svg
+                viewBox="0 0 24 24">
+                <path d="M3 3v18h18M7 16l4-4 3 3 6-7" />
+              </svg></span></div>
+          <strong>GH₵ 24,860</strong>
+          <div class="kpi-foot"><span class="trend positive">+5.2%</span><small>vs last month</small></div>
+        </article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="panel revenue-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Revenue overview</h2>
+              <p>Income and expenses</p>
+            </div>
+            <select id="periodSelect" aria-label="Chart period">
+              <option>Last 6 months</option>
+              <option>Last 12 months</option>
+              <option>This year</option>
+            </select>
+          </div>
+          <div class="chart-summary">
+            <div><span>Net revenue</span><strong>GH₵ 24,860</strong></div>
+            <div class="chart-legend"><span><i class="income"></i>Income</span><span><i
+                  class="expense"></i>Expenses</span></div>
+          </div>
+          <div class="chart" aria-label="Revenue chart">
+            <div class="y-axis"><span>40k</span><span>30k</span><span>20k</span><span>10k</span><span>0</span></div>
+            <div class="plot">
+              <div class="grid-lines"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="bars">
+                <div class="bar-group">
+                  <div class="bar income" style="height:52%"></div>
+                  <div class="bar expense" style="height:30%"></div><span>Jun</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar income" style="height:67%"></div>
+                  <div class="bar expense" style="height:41%"></div><span>Jul</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar income" style="height:60%"></div>
+                  <div class="bar expense" style="height:36%"></div><span>Aug</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar income" style="height:76%"></div>
+                  <div class="bar expense" style="height:44%"></div><span>Sep</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar income" style="height:69%"></div>
+                  <div class="bar expense" style="height:39%"></div><span>Oct</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar income" style="height:86%"></div>
+                  <div class="bar expense" style="height:48%"></div><span>Nov</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel stock-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Livestock distribution</h2>
+              <p>By category</p>
+            </div>
+            <button class="more-button" aria-label="More options">•••</button>
+          </div>
+          <div class="donut-wrap">
+            <div class="donut">
+              <div><strong>248</strong><span>Total pigs</span></div>
+            </div>
+          </div>
+          <div class="distribution-list">
+            <div><span><i class="dot-sow"></i>Weaning pigs</span><strong>96</strong></div>
+            <div><span><i class="dot-piglet"></i>Piglets</span><strong>78</strong></div>
+            <div><span><i class="dot-sow2"></i>Sows</span><strong>48</strong></div>
+            <div><span><i class="dot-boar"></i>Boars</span><strong>26</strong></div>
+          </div>
+        </article>
+
+        <article class="panel livestock-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Recent livestock</h2>
+              <p>Latest herd activity</p>
+            </div>
+            <button class="text-button" id="viewLivestock">View all <span>→</span></button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Pig ID</th>
+                  <th>Breed</th>
+                  <th>Category</th>
+                  <th>Weight</th>
+                  <th>Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>PG-0248</strong></td>
+                  <td>Large White</td>
+                  <td>Sow</td>
+                  <td>148 kg</td>
+                  <td><span class="pill healthy">Healthy</span></td>
+                  <td><button class="row-menu">•••</button></td>
+                </tr>
+                <tr>
+                  <td><strong>PG-0247</strong></td>
+                  <td>Duroc</td>
+                  <td>Boar</td>
+                  <td>162 kg</td>
+                  <td><span class="pill healthy">Healthy</span></td>
+                  <td><button class="row-menu">•••</button></td>
+                </tr>
+                <tr>
+                  <td><strong>PG-0246</strong></td>
+                  <td>Landrace</td>
+                  <td>Piglet</td>
+                  <td>18 kg</td>
+                  <td><span class="pill attention">Under care</span></td>
+                  <td><button class="row-menu">•••</button></td>
+                </tr>
+                <tr>
+                  <td><strong>PG-0245</strong></td>
+                  <td>Large White</td>
+                  <td>Weaning</td>
+                  <td>42 kg</td>
+                  <td><span class="pill healthy">Healthy</span></td>
+                  <td><button class="row-menu">•••</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel tasks-panel">
+          <div class="panel-header">
+            <div>
+              <h2>Today's tasks</h2>
+              <p>3 items need attention</p>
+            </div>
+            <button class="more-button" aria-label="More options">•••</button>
+          </div>
+          <div class="task-list">
+            <label class="task"><input type="checkbox" /><span class="custom-check"></span>
+              <div><strong>Vaccinate sow group A</strong><small>Health · 9:00 AM</small></div>
+            </label>
+            <label class="task"><input type="checkbox" /><span class="custom-check"></span>
+              <div><strong>Reorder grower feed</strong><small>Inventory · 11:30 AM</small></div>
+            </label>
+            <label class="task"><input type="checkbox" /><span class="custom-check"></span>
+              <div><strong>Follow up with Kofi Mensah</strong><small>Customer · 2:00 PM</small></div>
+            </label>
+          </div>
+          <button class="add-task" id="addTaskButton">+ Add task</button>
+        </article>
+      </section>
+
+      <section class="alerts-row">
+        <article class="alert-card">
+          <span class="alert-icon amber">!</span>
+          <div><strong>Low feed stock</strong>
+            <p>Grower feed is below 20% capacity</p>
+          </div>
+          <button>View inventory</button>
+        </article>
+        <article class="alert-card">
+          <span class="alert-icon green">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18ZM8 12l2.5 2.5L16 9" />
+            </svg>
+          </span>
+          <div><strong>3 piglets due for weaning</strong>
+            <p>Review and schedule this week</p>
+          </div>
+          <button>View breeding</button>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <div class="overlay" id="overlay"></div>
+  <aside class="notifications-panel" id="notificationsPanel" aria-hidden="true">
+    <div class="panel-header">
+      <div>
+        <h2>Notifications</h2>
+        <p>Recent activity</p>
+      </div><button class="icon-button" id="closeNotifications" aria-label="Close">×</button>
+    </div>
+    <div class="notification-list">
+      <div class="notification"><span class="alert-icon amber">!</span>
+        <div><strong>Feed stock running low</strong>
+          <p>Grower feed · 12 minutes ago</p>
+        </div>
+      </div>
+      <div class="notification"><span class="alert-icon green">✓</span>
+        <div><strong>Sale completed</strong>
+          <p>GH₵ 4,800 received · 1 hour ago</p>
+        </div>
+      </div>
+      <div class="notification"><span class="alert-icon blue">i</span>
+        <div><strong>New customer enquiry</strong>
+          <p>Akosua Farm Supplies · 3 hours ago</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <dialog id="addPigDialog">
+    <form method="dialog" id="addPigForm">
+      <div class="dialog-header">
+        <div>
+          <p>Livestock record</p>
+          <h2>Add a new pig</h2>
+        </div><button class="icon-button" value="cancel" aria-label="Close">×</button>
+      </div>
+      <div class="form-grid">
+        <label>Pig ID<input name="pigId" required placeholder="e.g. PG-0249" /></label>
+        <label>Breed<select name="breed">
+            <option>Large White</option>
+            <option>Duroc</option>
+            <option>Landrace</option>
+          </select></label>
+        <label>Category<select name="category">
+            <option>Piglet</option>
+            <option>Weaning</option>
+            <option>Sow</option>
+            <option>Boar</option>
+          </select></label>
+        <label>Weight (kg)<input name="weight" type="number" min="1" placeholder="0" /></label>
+        <label class="full">Health status<select name="health">
+            <option>Healthy</option>
+            <option>Under care</option>
+            <option>Sick</option>
+          </select></label>
+      </div>
+      <div class="dialog-actions"><button class="secondary-button" value="cancel">Cancel</button><button
+          class="primary-button" value="default" id="savePig">Save pig</button></div>
+    </form>
+  </dialog>
+
+  <script src="dashboard.js"></script>
+</body>
+
+</html>
